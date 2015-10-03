@@ -34,17 +34,17 @@ plot(cmdscale(dist(iris[,-5])),
 ## try regression mode on two dimensions
 
 # create data
-x <- seq(0.1, 5, by = 0.05)
-y <- log(x) + rnorm(x, sd = 0.2)
+x1 <- seq(0.1, 5, by = 0.05)
+y1 <- log(x) + rnorm(x, sd = 0.2)
 
 # estimate model and predict input values
-m   <- svm(x, y)
-new <- predict(m, x)
+m   <- svm(x1, y1)
+new <- predict(m, x1)
 
 # visualize
-plot(x, y)
-points(x, log(x), col = 2)
-points(x, new, col = 4)
+plot(x1, y1)
+points(x1, log(x1), col = 2)
+points(x1, new, col = 4)
 
 ## density-estimation
 
@@ -82,7 +82,7 @@ m <- svm(Species ~ ., data = i2, class.weights = wts)
 #Parameter
 ######################
 #Change the parameters--Cost
-model <- svm(Species ~ ., data = iris,cost=1)
+model <- svm(Species ~ ., data = iris,cost=10)
 # test with train data
 pred <- predict(model, x)
 pred <- fitted(model)
@@ -91,10 +91,9 @@ table(pred, y)
 
 #Change the parameters--gamma 
 default = 1/ncol(iris[,-5])
-model <- svm(Species ~ ., data = iris,gamma=0.25)
+model <- svm(Species ~ ., data = iris,gamma=5)
 # test with train data
 pred <- predict(model, x)
 pred <- fitted(model)
 # Check accuracy:
 table(pred, y)
-
